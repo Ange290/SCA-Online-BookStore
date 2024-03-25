@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
-app.use(express)
+app.use(express.json())
 
 //create server
 const port = process.env.PORT || 5000;
