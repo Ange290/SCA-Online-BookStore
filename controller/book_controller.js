@@ -1,24 +1,49 @@
 
-const { json } = require('express');
-const  bookStoreSchema = require('../model/bookstore_Model.js');
+const express = require('express');
+const  BookModel = require('../model/bookstore_Model.js');
 
 const  bookController={
     createBook : async(req,res)=>{
         try {
-            const createBookstore = await bookStoreSchema.create(req.body);
-            res.status(201).json({message: 'Book Created Successfully'}, createBookstore);
+            //   const newStudent = await studentModel.create(req.body)
+            const createBookstore = await BookModel.create(req.body);
+            res.status(201).json({message:'Book Created Successfully', book: createBookstore});
         } catch (error) {
-            res.status(400).json({message: error})
+            res.status(500).json({message:'Error in Creating', error: error.message})
         }
     },
-    getAllBook: async(req,res)=>{
+
+    // getBytitle
+    getByTitle:async(req,res)=>{
         try {
-            const getAll = await bookStoreSchema.find()
-            res.status(200).json({getAll})
+            const titles = ({title: req.params.title})
+            const ByTitle = await BookModel.findOne(titles);
+            res.status(200).json({message:`The book : ${titles.title}`, book: ByTitle});
         } catch (error) {
-            res.status(500).json({message: error})
+            res.status(500).json({message:'Error in Search by title', book: error})
         }
-     }//,
-    // getById
+    },
+    //get by author
+    getByAuthor:async(req,res)=>{
+        try {
+            const authors = ({author: req.params.author})
+            const ByAuthors = await BookModel.findOne(authors);
+            res.status(200).json({message:`The Author : ${authors.author}`, book: ByAuthors});
+        } catch (error) {
+            res.status(500).json({message:'Error in Search by Author', book: error})
+        }
+    },
+       //get by genre
+  
+    getByGenre: async (req, res) => {
+        try {
+            const genres = req.params.genre.split(','); // Assuming genres are comma-separated in the request
+            const books = await BookModel.find({ genre: { $in: genres } }); // Use $in operator to match any genre in the array
+            res.status(200).json({ message: `Books with genres: ${genres.join(', ')}`, books: books });
+        } catch (error) {
+            res.status(500).json({ message: 'Error in Search by Genre', error: error });
+        }
+    },
+    //
 }
 module.exports= bookController;

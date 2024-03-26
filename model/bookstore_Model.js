@@ -18,7 +18,10 @@ required: true
 },
 availability:{
 type: Boolean,
-default: false
-}
-});
-module.exports= bookStoreSchema;
+default: true
+}},
+{timestamps:true}
+);
+
+const BookModel = mongoose.model('Books',bookStoreSchema)
+module.exports= BookModel;
