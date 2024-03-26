@@ -1,6 +1,5 @@
 
-const express = require('express');
-const  BookModel = require('../model/bookstore_Model.js');
+
 
 const  bookController={
     createBook : async(req,res)=>{
@@ -13,12 +12,14 @@ const  bookController={
         }
     },
 
+
+
     // getBytitle
     getByTitle:async(req,res)=>{
         try {
             const titles = ({title: req.params.title})
             const ByTitle = await BookModel.findOne(titles);
-            res.status(200).json({message:`The book : ${titles.title}`, book: ByTitle});
+           res.status(200).json({message:`The book : ${titles.title}`, book: ByTitle});
         } catch (error) {
             res.status(500).json({message:'Error in Search by title', book: error})
         }
