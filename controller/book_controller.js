@@ -1,5 +1,5 @@
 
-
+const BookModel = require("../model/bookstore_Model.js");
 
 const  bookController={
     createBook : async(req,res)=>{
@@ -45,6 +45,40 @@ const  bookController={
             res.status(500).json({ message: 'Error in Search by Genre', error: error });
         }
     },
+    //UpdateBook
+
+    updateBook: async(req,res)=>{
+        try {
+            const titled = ({title:req.params.title})
+            const{author, genre, price, availability}= req.body
+            const updated ={author, genre, price, availability}
+            const updatedBook = await BookModel.findOneAndUpdate(titled,updated,{new: true})
+            if(!updatedBook){
+                res.status(500).json({message:'Book not found'});
+            }
+            else{
+                res.status(200).json({message:'Book Updated Successfully', book: updatedBook});
+            }
+        } catch (error) {
+            res.status(500).json({message:'Error in updating book', book: error});
+        }
+    },
+
+    //delete Book
+    deleteBook: async(req,res)=>{
+        try {
+            const titley = ({title: req.params.title});
+            const deletedBook = await BookModel.findOneAndDelete(titley);
+            if(!deletedBook){
+                res.status(500).json({message:'Book not found'});
+            }
+            else{
+            res.status(200).json({message:'Book Deleted Successfully', book: deletedBook});
+            }
+        } catch (error) {
+            res.status(500).json({message:'Error in Deleting book', book:error})
+        }
+    }
     
 }
 module.exports= bookController;

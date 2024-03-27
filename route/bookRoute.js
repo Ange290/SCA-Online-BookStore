@@ -6,5 +6,7 @@ route.post("/api/create", bookController.createBook);
 route.get("/api/title/:title", bookController.getByTitle);
 route.get("/api/author/:author", bookController.getByAuthor);
 route.get("/api/genre/:genre", bookController.getByGenre);
+route.patch("/api/update/:title", bookController.updateBook);
+route.delete("/api/delete/:title", bookController.deleteBook);
 
 module.exports = route;
