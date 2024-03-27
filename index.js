@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const route = require('./route/bookRoute.js');
+const bcrypt = require('bcrypt');
 
 app.use(express.json())
 app.use(route);
