@@ -12,7 +12,15 @@ const  bookController={
         }
     },
 
-
+//get allbook
+getAllBook: async(req,res)=>{
+try {
+    const getAll = await BookModel.find()
+    res.status(200).json({message:'Order History and detail of past purchase', getAll});
+} catch (error) {
+    res.status(500).json({message:'Error in getting all', error})
+}
+},
 
     // getBytitle
     getByTitle:async(req,res)=>{

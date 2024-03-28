@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const app = express();
 const route = require('./route/bookRoute.js');
 // const bcrypt = require('bcrypt');
-const routes = require('./route/user_route.js');
+
 app.use(express.json())
 app.use(route);
-app.use(routes);
+
 
 
 //create server
