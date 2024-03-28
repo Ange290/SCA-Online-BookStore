@@ -12,9 +12,20 @@ const UserController ={
                 num:req.body.num,
             });
             const savedUser = await user.save();
+            if(!savedUser){
+                res.status(500).json({message:'must be unique'})
+            }
             res.status(201).json({message:'User Created Successfully'});
         } catch (error) {
            res.status(500).json(error) 
+        }
+    },
+    getUser:async (req,res)=>{
+        try {
+            const getted = await userModel.find()
+            res.status(200).json(getted)
+        } catch (error) {
+            res.status(500).json(error)
         }
     }
 }
