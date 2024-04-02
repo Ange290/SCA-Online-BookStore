@@ -10,9 +10,9 @@ app.use(route);
 
 
 const port = process.env.PORT || 5000;
-const db = "mongodb://localhost:27017/SCA-Online-Bookstore";
+//const db = "mongodb://localhost:27017/SCA-Online-Bookstore";
 
-mongoose.connect(db)
+mongoose.connect("mongodb://localhost:27017/SCA-Online-Bookstore")
  .then(() => {
     console.log("Successfully connected to the database.");
     app.listen(port, () => {
