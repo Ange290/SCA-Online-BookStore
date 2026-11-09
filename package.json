@@ -4,8 +4,8 @@
   "description": "Online Bookstore",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index",
-    "dev": "nodemon index"
+    "start": "node init && nodemon index",
+    "dev": "node init && nodemon index"
   },
   "author": "Ange UWIZERA",
   "license": "MIT",
